@@ -572,16 +572,21 @@ public class Lister<E> implements List<E>
 			return true;
 		}
 
-		if (! (o instanceof Collection))
+		if (! (o instanceof List))
 		{
 			return false;
 		}
 
-		Collection collection = (Collection) o;
-		if (this.size() != collection.size())
+		List list = (List) o;
+		if (this.size() != list.size())
 			return false;
-		if (!this.containsAll(collection))
-			return false;
+		Iterator it1 = iterator();
+		Iterator it2 = list.iterator();
+		while (it1.hasNext())
+		{
+			if (!it1.next().equals(it2.next()))
+				return false;
+		}
 		return true;
 	}
 
