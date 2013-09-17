@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -104,5 +105,20 @@ public class ListerTest_Collections
 		{
 			lister.add("Lol"+i);
 		}
+	}
+
+	@Test
+	public void testMorgen() throws Exception
+	{
+		List integerList = Arrays.asList(1, 2, 3,4,5,6);
+		List<Integer> list = new Lister<Integer>();
+		list.addAll(integerList);
+		Assert.assertEquals(integerList.size(), list.size());
+
+		Assert.assertEquals(true, integerList.equals(list));
+
+		list.addAll(5, integerList);
+		Assert.assertEquals(integerList.size() * 2, list.size());
+
 	}
 }

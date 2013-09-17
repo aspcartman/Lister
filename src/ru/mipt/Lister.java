@@ -12,6 +12,7 @@ public class Lister<E> implements List<E>
 {
 	private Cell listStart = null;
 	private Cell listEnd = null;
+	private Lister<E> parentLister = null;
 
 	public boolean isEmpty()
 	{
@@ -110,16 +111,21 @@ public class Lister<E> implements List<E>
 			return false;
 		}
 
-		Cell w = new Cell(listEnd, e);
+		Cell cell = new Cell(listEnd, e);
 		if (listStart == null)
 		{
-			listStart = w;
+			listStart = cell;
 		}
 		if (listEnd != null)
 		{
-			listEnd.next = w;
+			if (listEnd.next != null)
+			{
+				listEnd.next.prev = cell;
+				cell.next = listEnd.next;
+			}
+			listEnd.next = cell;
 		}
-		listEnd = w;
+		listEnd = cell;
 		return true;
 	}
 
@@ -142,6 +148,7 @@ public class Lister<E> implements List<E>
 		Lister<E> sub = new Lister<E>();
 		sub.listStart = this.getCell(i);
 		sub.listEnd = this.getCell(i2 - 1);
+		sub.parentLister = this;
 		return sub;
 	}
 
