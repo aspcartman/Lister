@@ -259,7 +259,8 @@ public class Lister<E> implements List<E>
 		while (it.hasNext())
 		{
 			E obj = (E) it.next();
-			this.remove(obj);
+			//noinspection StatementWithEmptyBody
+			while(remove(obj));
 			changed = true;
 		}
 		return changed;
@@ -561,5 +562,34 @@ public class Lister<E> implements List<E>
 			this.next = next;
 			this.prev = prev;
 		}
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+
+		if (! (o instanceof Collection))
+		{
+			return false;
+		}
+
+		Collection collection = (Collection) o;
+		if (this.size() != collection.size())
+			return false;
+		if (!this.containsAll(collection))
+			return false;
+		return true;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = listStart != null ? listStart.hashCode() : 0;
+		result = 31 * result + (listEnd != null ? listEnd.hashCode() : 0);
+		return result;
 	}
 }

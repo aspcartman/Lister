@@ -133,4 +133,29 @@ public class ListerTest_Collections
 
 
 	}
+	@Test
+	public void testMorgen3() throws Exception {
+		List integerList = Arrays.asList(1, 2, 3,4,5,6);
+
+		List<Integer> list = new Lister<Integer>();
+		list.addAll(integerList);
+		list.addAll(integerList);
+
+		list.removeAll(integerList);
+		Assert.assertEquals(true, list.isEmpty());
+	}
+
+	@Test
+	public void testMorgen4() throws Exception {
+		List integerList = Arrays.asList(1, 2, 3,4,5,6);
+
+		List<Integer> list = new Lister<Integer>();
+		list.addAll(integerList);
+		Assert.assertEquals(true, list.equals(integerList));
+
+		list.add(new Integer(55));
+
+		list.retainAll(integerList);
+		Assert.assertEquals(true, list.equals(integerList));
+	}
 }
