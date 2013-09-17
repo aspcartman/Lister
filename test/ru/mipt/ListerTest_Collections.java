@@ -119,6 +119,18 @@ public class ListerTest_Collections
 
 		list.addAll(5, integerList);
 		Assert.assertEquals(integerList.size() * 2, list.size());
+	}
+
+	@Test
+	public void testMorgen2() throws Exception
+	{
+		Lister<Integer> lister = new Lister<Integer>();
+		lister.add(0);
+		lister.add(1);
+		lister.add(2);
+
+		Assert.assertEquals(true, lister.addAll(lister));
+
 
 	}
 }

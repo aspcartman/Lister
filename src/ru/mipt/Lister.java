@@ -92,14 +92,20 @@ public class Lister<E> implements List<E>
 
 	public boolean addAll(Collection<? extends E> es)
 	{
+		int size = es.size();
+		int count = 0;
 		boolean changed = false;
 		for (E element : es)
 		{
+			if (count == size)
+				break;
+
 			boolean added = add(element);
 			if (added)
 			{
 				changed = true;
 			}
+			count++;
 		}
 		return changed;
 	}
